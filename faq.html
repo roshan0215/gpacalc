@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator FAQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .faq-content {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GPA Calculator FAQ</h1>
+        <div class="faq-content">
+            <h3>How to Use the GPA Calculator:</h3>
+            <p>1. Enter the number of years you want to log data for.</p>
+            <p>2. Click the "Create Table" button to generate the data entry table.</p>
+            <p>3. Enter the number of classes you are taking for each semester.</p>
+            <p>4. For each class, enter the course name, grade, and check the "Honors/AP" box if applicable.</p>
+            <p>5. The GPA will be automatically calculated and displayed below the table.</p>
+            <p>6. You can save, load, and clear data using the respective buttons.</p>
+            <p>7. Click the "FAQ" button to view these instructions again.</p>
+            <h3>How is the data saved?</h3>
+            <p>The data is saved in your browser, and the data inputted is only retrievable by people that have access to your browser.</p>
+        </div>
+        <button onclick="goToIndex()">Back to Calculator</button>
+    </div>
+
+    <script>
+        function goToIndex() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
