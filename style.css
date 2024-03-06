@@ -1,0 +1,235 @@
+/* Styles for the body and overall container */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+  height: 100vh;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  position: fixed; /* Fix the toolbar at the top */
+  top: 0; /* Position it at the top of the viewport */
+}
+
+.toolbar img {
+  height: 50px;
+}
+
+.toolbar a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.toolbar a:hover {
+  background-color: #555;
+}
+
+/* Styles for the GPA calculator container */
+.container {
+  text-align: center;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  overflow-x: hidden;
+  margin-top: 100px; /* Push container to the center vertically */
+}
+
+/* Styles for the table container with transitions */
+#tableContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  overflow-x: hidden;
+}
+
+/* Styles for the table */
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+    overflow-x: auto;
+    background-color: #fff;
+}
+
+/* Styles for table headers and cells */
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Styles for table headers */
+th {
+    background-color: #f2f2f2;
+}
+
+/* Styles for result section */
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Styles for buttons container */
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Styles for regular buttons */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for regular buttons */
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Styles for FAQ button */
+.faq-button {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Hover effect for FAQ button */
+.faq-button:hover::after {
+    visibility: visible;
+    opacity: 1;
+    left: 50%; /* Center the tooltip horizontally */
+    transform: translateX(-50%); /* Center the tooltip horizontally */
+    bottom: 100%; /* Position above the element */
+
+    /* Check if the tooltip goes off the right side of the viewport */
+    right: auto;
+    if (window.innerWidth - (this.getBoundingClientRect().left + this.offsetWidth) < 0) {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+}
+
+.faq-button::after {
+    content: attr(data-tooltip);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    white-space: nowrap;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+}
+
+/* Tooltip styling */
+[title]:hover::after {
+    content: attr(title);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+/* Tooltip styling */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    white-space: nowrap;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+}
+
+.tooltip:hover::after {
+    visibility: visible;
+    opacity: 1;
+    left: 50%; /* Center the tooltip horizontally */
+    transform: translateX(-50%); /* Center the tooltip horizontally */
+    bottom: 100%; /* Position above the element */
+
+    /* Check if the tooltip goes off the right side of the viewport */
+    right: auto;
+    if (window.innerWidth - (this.getBoundingClientRect().left + this.offsetWidth) < 0) {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+}
+
+.tooltipap {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltipap::after {
+    content: attr(data-tooltip);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    white-space: nowrap;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+}
+
+.tooltipap:hover::after {
+    visibility: visible;
+    opacity: 1;
+    left: 75%;
+    transform: translateX(-100%);
+    bottom: 100%; /* Position above the element */
+
+    /* Check if the tooltip goes off the right side of the viewport */
+    right: auto;
+    if (window.innerWidth - (this.getBoundingClientRect().left + this.offsetWidth) < 0) {
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+}
