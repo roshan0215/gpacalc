@@ -1,48 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Meta tags for character set and viewport -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title of the web page -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GPA Calculator</title>
-    <!-- Link to the CSS file -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="toolbar">
-      <img src="https://s3-us-west-2.amazonaws.com/sportshub2-uploads-prod/files/sites/234/2017/07/13194106/11995.png" alt="School Logo">
-      <a href="https://ps.dvusd.org/menu/home.html" target="_blank">PowerSchool</a>
-      <a href="https://www.dvusd.org/mrhs" target="_blank">MRHS Home Page</a>
-  </div>
-    <!-- Main container for GPA Calculator -->
-    <div class="container">
-        <!-- Heading for GPA Calculator -->
-        <h1>GPA Calculator</h1>
-        
-        <!-- Input for the number of years -->
-        <label for="numYears" class="tooltip" data-tooltip="Specify the number of years you want to log data for.">How many years would you like to log data for?</label>
-        <input type="number" id="numYears" min="1">
-        
-        <!-- Button to create the GPA calculation table -->
-        <button onclick="createTable()" class="tooltipap" data-tooltip="Click to create a GPA calculation table.">Create Table</button>
-
-        <!-- Container for the GPA calculation table -->
-        <div id="tableContainer"></div>
-        
-        <!-- Result section for displaying GPA -->
-        <div id="result" class="result"></div>
-        
-        <!-- Button for clearing data -->
-        <div class="buttons">
-            <button onclick="clearData()" class="tooltip" data-tooltip="Clear locally saved GPA data.">Clear Data</button>
-        </div>
-
-        <!-- FAQ button to navigate to FAQ page -->
-        <button class="faq-button" onclick="goToFAQ()" class="tooltip" data-tooltip="Go to the FAQ page.">FAQ</button>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="toolbar">
+      <img src="https://s3-us-west-2.amazonaws.com/sportshub2-uploads-prod/files/sites/234/2017/07/13194106/11995.png" alt="School Logo" />
+      <a href="https://ps.dvusd.org/menu/home.html" target="\_blank">PowerSchool</a>
+      <a href="https://www.dvusd.org/mrhs" target="\_blank">MRHS Home Page</a>
+      <button id="toggleMode" onclick="toggleLightDarkMode()">Toggle Mode</button>
     </div>
+    <div class="sidebar">
+      <div class="box">
+        <h3 class="box-header">FAQ</h3>
+        <div class="box-content">
+          <h3>How to Use the GPA Calculator:</h3>
+          <p>1. Enter the number of years you want to log data for.</p>
+          <p>2. Click the "Create Table" button to generate the data entry table.</p>
+          <p>3. Enter the number of classes you are taking for each semester.</p>
+          <p>4. For each class, enter the course name, grade, and check the "Honors/AP" box if applicable.</p>
+          <p>5. The GPA will be automatically calculated and displayed below the table.</p>
+          <p>6. You can save, load, and clear data using the respective buttons.</p>
+          <p>7. Click the "FAQ" button to view these instructions again.</p>
+          <h3>How is the data saved?</h3>
+          <p>The data is saved in your browser, and the data inputted is only retrievable by people that have access to your browser.</p>
+        </div>
+      </div>
+      <div class="box">
+        <h3 class="box-header">Grading Scale</h3>
+        <div class="box-content">
+          <table>
+            <tr>
+              <th>Proficiency Based Grade</th>
+              <th>Non-Honors/AP/IB GPA Point</th>
+              <th>Honors/AP/IB GPA Point</th>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>4.0</td>
+              <td>5.0</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>3.0</td>
+              <td>4.0</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>2.0</td>
+              <td>3.0</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>1.0</td>
+              <td>2.0</td>
+            </tr>
+            <tr>
+              <td>F</td>
+              <td>0</td>
+              <td>1.0</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="box">
+  <h3 class="box-header">Academic Journal</h3>
+  <div class="box-content">
+    <textarea id="journalEntry" placeholder="Write your journal entry..." class="custom-text-input large-textarea"></textarea>
+    <div id="journalEntries"></div>
+  </div>
+</div>
+    </div>
+    <div class="container">
+      <h1>GPA Calculator</h1>
+      <label for="numYears" class="tooltip" data-tooltip="Specify the number of years you want to log data for.">How many years would you like to log data for?</label>
+      <input type="number" id="numYears" min="1" class="custom-number-input" />
+      <button onclick="createTable()" class="tooltipap" data-tooltip="Click to create a GPA calculation table.">Create Table</button>
+      <div id="tableContainer"></div>
+      <div id="result" class="result"></div>
+      <div class="buttons">
+        <button onclick="clearData()" class="tooltip" data-tooltip="Clear locally saved GPA data.">Clear Data</button>
 
-    <!-- Link to the JavaScript file -->
+        <button class="add-to-plot" onclick="addToPlot()">Add to Plot</button>
+      </div>
+      <div class="chart-container">
+        <canvas id="gpaChart"></canvas>
+      </div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
