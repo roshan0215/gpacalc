@@ -4,9 +4,10 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .toolbar {
@@ -16,46 +17,138 @@ body {
   width: 100%;
   background-color: #333;
   color: #fff;
-  padding: 10px;
-  position: fixed; /* Fix the toolbar at the top */
-  top: 0; /* Position it at the top of the viewport */
+  padding: 0.5vw; /* Reduced the padding for the toolbar */
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 .toolbar img {
-  height: 50px;
+  height: 3vw; /* Reduced the height of the image */
 }
 
 .toolbar a {
   color: #fff;
   text-decoration: none;
-  margin: 0 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
+  margin: 0 1vw;
+  padding: 0.5vw 1vw;
+  border-radius: 0.5vw;
   transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 .toolbar a:hover {
-  background-color: #555;
+    background-color: #555;
+}
+
+/* Styles for the sidebar and expandable boxes */
+.sidebar {
+    width: 400px;
+    background-color: transparent;
+    padding: 2vw;
+    z-index: 2;
+    overflow-y: auto;
+    position: fixed; /* Add this line */
+    top: 8vw; /* Add this line */
+    left: 0; /* Add this line */
+    height: calc(100vh - 8vw); /* Add this line */
+    overflow-y: auto;
+    max-height: calc(100vh - 16vw); /* Adjust the value as needed */
+}
+
+.box {
+    margin-bottom: 20px;
+    width: 100%; /* Ensure the sidebar boxes take up the full width */
+}
+
+.box-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%; /* Ensure the sidebar box headers take up the full width */
+}
+
+.box-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.box-header:hover + .box-content,
+.box-content:hover {
+    max-height: 500px; /* Adjust the value as needed */
+}
+
+.box-header:hover + .box-content {
+    max-height: 500px; /* Adjust the value as needed */
+}
+
+/* Styles for the Academic Journal */
+#journalEntry {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+#saveJournalEntry {
+    margin-top: 10px;
+}
+
+#journalEntries {
+    margin-top: 20px;
+}
+
+#journalEntries div {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 /* Styles for the GPA calculator container */
 .container {
   text-align: center;
-  border: 2px solid #3498db;
-  border-radius: 10px;
-  padding: 20px;
+  border: 0.2vw solid #3498db;
+  border-radius: 1vw;
+  padding: 2vw;
   background-color: #fff;
   overflow-x: hidden;
-  margin-top: 100px; /* Push container to the center vertically */
+  overflow-y: auto;
+  margin: 10vw auto 2vw auto; /* Adjust the top margin to give space from the sidebar */
+  max-width: calc(100vw - 420px); /* Adjust this value based on your sidebar width */
+  margin-right: 20px; /* Add some spacing from the right edge */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
 /* Styles for the table container with transitions */
 #tableContainer {
-  max-height: 400px;
-  overflow-y: auto;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  overflow-x: hidden;
+    max-height: 400px;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    overflow-x: hidden;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
 
 /* Styles for the table */
@@ -65,6 +158,7 @@ table {
     margin: auto;
     overflow-x: auto;
     background-color: #fff;
+    overflow-y: auto;
 }
 
 /* Styles for table headers and cells */
@@ -89,7 +183,8 @@ th {
 .buttons {
     margin-top: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* Styles for regular buttons */
@@ -97,7 +192,7 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #3498db;
+    background-color: #006400;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -107,7 +202,11 @@ button {
 
 /* Hover effect for regular buttons */
 button:hover {
-    background-color: #2980b9;
+    background-color: #800000;
+}
+
+.add-to-plot {
+    /* Additional styles for the "Add to Plot" button go here */
 }
 
 /* Styles for FAQ button */
@@ -120,11 +219,9 @@ button:hover {
 .faq-button:hover::after {
     visibility: visible;
     opacity: 1;
-    left: 50%; /* Center the tooltip horizontally */
-    transform: translateX(-50%); /* Center the tooltip horizontally */
-    bottom: 100%; /* Position above the element */
-
-    /* Check if the tooltip goes off the right side of the viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
     right: auto;
     if (window.innerWidth - (this.getBoundingClientRect().left + this.offsetWidth) < 0) {
         left: auto;
@@ -185,11 +282,9 @@ button:hover {
 .tooltip:hover::after {
     visibility: visible;
     opacity: 1;
-    left: 50%; /* Center the tooltip horizontally */
-    transform: translateX(-50%); /* Center the tooltip horizontally */
-    bottom: 100%; /* Position above the element */
-
-    /* Check if the tooltip goes off the right side of the viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 100%;
     right: auto;
     if (window.innerWidth - (this.getBoundingClientRect().left + this.offsetWidth) < 0) {
         left: auto;
@@ -223,13 +318,249 @@ button:hover {
     opacity: 1;
     left: 75%;
     transform: translateX(-100%);
-    bottom: 100%; /* Position above the element */
-
-    /* Check if the tooltip goes off the right side of the viewport */
+    bottom: 100%;
     right: auto;
     if (window.innerWidth - (this.getBoundingClientRect().left + this.offsetWidth) < 0) {
         left: auto;
         right: 0;
         transform: translateX(0);
     }
+}
+
+.chart-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Styles for the toggle mode button */
+#toggleMode {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.3s ease;
+}
+
+/* Animation for the toggle mode button */
+#toggleMode:hover {
+    animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Styles for dark mode */
+body.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+body.dark-mode .container {
+    background-color: #333;
+    border-color: #555;
+}
+
+body.dark-mode table {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-mode th {
+    background-color: #555;
+}
+
+body.dark-mode button {
+    background-color: #800000;
+    color: #fff;
+}
+
+body.dark-mode button:hover {
+    background-color: #006400;
+}
+
+/* Custom text input styles */
+.custom-text-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff; /* Add this line for light mode */
+    color: #333; /* Add this line for light mode */
+}
+
+/* Custom text input styles for dark mode */
+body.dark-mode .custom-text-input {
+    background-color: #444; /* Update background color for dark mode */
+    color: #fff; /* Update text color for dark mode */
+    border-color: #666; /* Update border color for dark mode */
+}
+
+/* Custom checkbox styles */
+.custom-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background-color: #fff; /* Add this line for light mode */
+}
+
+/* Custom checkbox styles for dark mode */
+body.dark-mode .custom-checkbox {
+    background-color: #444; /* Update background color for dark mode */
+    border-color: #666; /* Update border color for dark mode */
+}
+
+.custom-checkbox:checked {
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+
+.custom-checkbox:checked::after {
+    content: "\2714";
+    color: #fff;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+/* Custom number input styles */
+.custom-number-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+    /* Remove default spin buttons */
+    -moz-appearance: textfield;
+    appearance: none; /* Add this line to remove spin buttons for all browsers */
+}
+
+/* Custom number input styles for dark mode */
+body.dark-mode .custom-number-input {
+    background-color: #444;
+    color: #fff;
+    border-color: #666;
+}
+
+/* Remove spin buttons for number inputs */
+.custom-number-input::-webkit-inner-spin-button,
+.custom-number-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Styles for error messages */
+.error-message {
+    color: #8B0000;
+    margin-top: 10px;
+}
+
+/* Styles for toolbar links */
+.toolbar a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.toolbar a:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+/* Styles for the toggle mode button */
+#toggleMode {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto;
+    transition: background-color 0.3s ease;
+}
+
+#toggleMode:hover {
+    background-color: #555;
+}
+/* Styles for large textarea */
+.large-textarea {
+  height: 200px; /* Adjust the height as desired */
+  font-family: Arial, sans-serif;
+}
+
+/* Dark mode styles for large textarea */
+body.dark-mode .large-textarea {
+  background-color: #444;
+  color: #fff;
+  border-color: #666;
+}
+
+
+@media (max-width: 1200px) {
+    .container {
+        margin-left: 420px; /* Adjust this value based on your sidebar width */
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .container {
+        margin-left: 0;
+    }
+}
+.honors-container {
+    display: flex;
+    align-items: center;
+}
+
+.honors-container label {
+    margin-left: 5px;
 }
